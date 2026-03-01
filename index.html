@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception.">
+  <meta name="keywords" content="PAGE-4D, Camera, Point map, Depth map, 4D reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception</title>
+
+  <meta property="og:title" content="PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception" />
+  <meta property="og:description"
+    content="PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception." />
+  <!-- Twitter automatically scrapes this. Go to https://cards-dev.twitter.com/validator?
+      if you update and want to force Twitter to re-scrape. -->
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:title" content="PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception" />
+  <meta property="twitter:description"
+    content="PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception." />
+  <!-- <meta property="twitter:image"         content="https://3dmagicpony.github.io/resources/overview.jpg" /> -->
+
+  <!-- MathJax library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSQGH8Q0WV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TSQGH8Q0WV');
+  </script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-4 publication-title" style="font-size: 2rem;">PAGE-4D: Disentangled Pose and Geometry Estimation for 4D Perception</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Anonymous Authors
+              </span>
+            </div>
+
+            <h1 style="font-size:24px;font-weight:bold">Anonymous Submission</h1>
+
+            <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/file/d/1caBtmWK8I-t6RyG2gAsUjSLWM0dl_1kh/view?usp=drive_link"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span>💻 Code</span>
+                  </a>
+                </span>
+                <!-- Demo Link -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/file/d/1c2G4z4sA3ouOmkPd2cZHDHnFB_n8LxU-/view?usp=drive_link"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span>🔑 Weights</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <style>
+    .video-border {
+      display: inline-block;
+      padding: 2px; /* adjust thickness of your 'border' */
+      border-radius: 4px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* try different gradient colors */
+    }
+    .video-border video {
+      display: block;
+      border: none;
+      border-radius: 4px; /* match the wrapper for a consistent look */
+    }
+  </style>
+
+  <style>
+    #teaser-video {
+      max-width: 85%;
+      margin: 0 auto;
+      display: block;
+      border: none; /* remove the solid border */
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    iframe {
+      border-radius: 0.5em;
+      width: 27.5em;
+      height: 27.5em;
+      border: none;
+      box-shadow: 0 0 1em 0em rgba(0, 0, 0, 0.15);
+    }
+    @media (max-width: 768px) {
+      iframe {
+        width: 100%;
+        height: 30em;
+      }
+    }
+
+    #architecture-img {
+      width: 90%;
+      margin: 0 auto;
+      display: block;
+      border: none;
+      border-radius: 0; /* removed border radius */
+      box-shadow: none; /* removed box shadow */
+    }
+
+    /* Enhanced style to further reduce space between buttons and teaser video */
+    .hero.teaser {
+      padding-top: 0;
+      margin-top: -3rem; /* Added negative margin to pull the teaser section up */
+    }
+    .hero.teaser .hero-body {
+      padding-top: 0; /* Reduced from 1rem to 0 */
+    }
+  </style>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser-video" autoplay muted loop playsinline height="100%">
+          <source src="./resources/teaser2.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle" style="text-align: center;"></h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="padding-top: 1rem;">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+
+
+          <h2 class="title is-4" style="font-weight: 700;">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Recent 3D feed-forward models, such as the Visual Geometry Grounded Transformer (VGGT), have shown strong capability in inferring 3D attributes of static scenes.
+              However, since they are typically trained on static datasets, these models often struggle in real-world scenarios involving complex dynamic elements, such as moving humans or deformable objects like umbrellas.
+              To address this limitation, we introduce <strong>PAGE-4D</strong>, a feedforward model that extends VGGT to dynamic scenes, enabling camera pose estimation, depth prediction and point cloud reconstruction —all without post-processing.
+              A central challenge in multi-task 4D reconstruction is the inherent conflict between tasks: accurate camera pose estimation requires suppressing dynamic regions, while geometry reconstruction requires modeling them. To resolve this tension, we propose a dynamics-aware aggregator that disentangles static and dynamic information by predicting a dynamics-aware mask—suppressing motion cues for pose estimation while amplifying them for geometry reconstruction.
+              Extensive experiments show that <strong>PAGE-4D</strong> consistently outperforms the original VGGT in dynamic scenarios, achieving superior results in camera pose estimation, monocular and video depth estimation, and dense point map reconstruction. The link for both source code and pretrained model weights are provided in the supplementary material.
+            </p>
+          </div>
+          <br>
+
+
+          <h2 class="title is-4" style="font-weight: 700;">Method</h2>
+          <div class="content has-text-justified">
+            <p>
+              PAGE-4D is composed of four key components: (1) a pre-trained DINO-style encoder that extracts image-level representations; (2) a dynamics-aware aggregator that integrates spatial and temporal cues through three modules—Frame Attention for inter-frame patch relations, Global Attention for intra-frame patch relations, and Dynamics-Aware Global Attention for disentangling dynamic from static content; (3) lightweight decoders for depth, 3D point maps; and (4) a larger decoder dedicated to camera pose estimation. PAGE-4D inherits components (1), (3), and (4) directly from VGGT, while extending component (2) into a three-stage dynamics-aware aggregator as in Fig. 3. The first stage consists of 8 layers, each composed of one Global Attention and one Frame Attention block. Its output is fed into a dynamic mask prediction module, which produces a dynamics-aware mask. This mask is then applied in the second stage to disentangle dynamic and static content for pose and geometry estimation. The second stage itself consists of 10 layers, each comprising a Dynamics-Aware Global Attention block and a Frame Attention block. The final stage consists of 6 layers as the first stage.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <!-- <img id="teaser" src="https://placehold.co/600x400" alt="Teaser image" style="width: 100%;"> -->
+            <img id="architecture-img" src="./resources/architecture.png" alt="Architecture">
+          </div>
+          <br>
+
+          <h2 class="title is-4" style="font-weight: 700;">Qualitative Visualization</h2>
+          <div class="content has-text-centered">
+            <p>
+              Reconstruction of In-the-wild Videos with PAGE-4D.
+            </p>
+          </div>
+          <!-- Begin new content: Demos -->
+
+          <!-- Wrapper for iframes -->
+          <div id="wrapper" style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+              ">
+            <!-- https://page-4d.github.io/anonymous-submission/build -->
+            <!-- <iframe
+            src="https://page-4d.github.io/anonymous-submission/build/?playbackPath=https://page-4d.github.io/anonymous-submission/resources/qualitative/recording_dpg_21_r3d.viser&initDistanceScale=0.08&initHeightOffset=2.0"></iframe>
+            <iframe
+            src="https://page-4d.github.io/anonymous-submission/build/?playbackPath=https://page-4d.github.io/anonymous-submission/resources/qualitative/recording_dpg_25_r3d.viser&initDistanceScale=0.08&initHeightOffset=2.0"></iframe>              -->
+
+            <iframe
+                    src="https://MonST3R-project.github.io/build/?playbackPath=
+                    https://page-4d.github.io/anonymous-submission/resources/qualitative/recording_dpg_21_r3d.viser&
+                    initDistanceScale=1&initHeightOffset=0.0"></iframe>
+
+            <iframe
+                    src="https://MonST3R-project.github.io/build/?playbackPath=
+                    https://page-4d.github.io/anonymous-submission/resources/qualitative/recording_dpg_25_r3d.viser&
+                    initDistanceScale=1&initHeightOffset=0.0"></iframe>
+
+
+<!--            <iframe-->
+<!--            src="https://page-4d.github.io/anonymous-submission/build/?playbackPath=https://page-4d.github.io/anonymous-submission/resources/qualitative/recording_dpg_21_r3d.viser&initDistanceScale=0.08&initHeightOffset=2.0"></iframe>-->
+<!--            <iframe-->
+<!--            src="/build/?playbackPath=/resources/qualitative/recording_dpg_25_r3d.viser&initDistanceScale=0.08&initHeightOffset=2.0"></iframe>-->
+          </div>
+
+
+          <br>
+
+          <h2 class="title is-4" style="font-weight: 700;">Qualitative Comparison</h2>
+          <div class="content has-text-justified" style="align-self: flex-start;">
+            <p>
+               PAGE-4D significantly outperforms all other methods across various tasks. Please refer to our paper for quantitative results. Here we also provide a qualitative comparison with VGGT(use the dropdown menu to switch).
+            </p>
+          </div>
+
+
+          <div class="model-container" id="model-compare-wrapper">
+            <!-- Model 1 Viewer with Label -->
+            <div class="model-wrapper-comparison">
+              <div class="model-label">PAGE-4D</div>
+              <model-viewer id="modelViewerComparison1" loading="eager"
+                touch-action="pan-y" environment-image="legacy"
+                src="resources/comparison/dpg/img3_27.glb"
+                zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                style="width: 100%; height: 100%;  background: #ffffff;">
+              </model-viewer>
+            </div>
+            <!-- Model 2 Viewer with Label -->
+            <div class="model-wrapper-comparison">
+              <div class="model-label">VGGT</div>
+              <model-viewer id="modelViewerComparison2"loading="eager"
+                touch-action="pan-y" environment-image="legacy"
+                src="resources/comparison/vggt/img3_27.glb"
+                zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                style="width: 100%; height: 100%; background: #ffffff;">
+              </model-viewer>
+            </div>
+          </div>
+          <div class="hero-body" style="padding: 0;">
+            <div class="content has-text-centered">
+              <div class="thumbnail-container", id="thumbnail-comparison", data-selected-name="Colosseum">
+                <!-- <img src="resources/comparison/assets/27.mp4" name="img3_27">
+                <img src="resources/comparison/assets/1.mp4" name="img3_1">
+                <img src="resources/comparison/assets/10.mp4" name="img2_10">
+                <img src="resources/comparison/assets/25.mp4" name="img2_25"> -->
+                <video src="resources/comparison/assets/27.mp4" name="img3_27" autoplay loop muted playsinline></video>
+                <video src="resources/comparison/assets/1.mp4"  name="img3_1"  autoplay loop muted playsinline></video>
+                <video src="resources/comparison/assets/10.mp4" name="img2_10" autoplay loop muted playsinline></video>
+                <video src="resources/comparison/assets/25.mp4" name="img2_25" autoplay loop muted playsinline></video>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="Conclusion" style="padding-top: 0rem;">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700;">Conclusion</h2>
+      <p>
+        Understanding dynamic scenes remains a central challenge in 4D computer vision, where object motion simultaneously provides valuable geometric cues and disrupts static-scene assumptions critical for camera pose estimation. In this work, we introduce PAGE-4D, a feedforward framework that adapts a pretrained 3D foundation model to dynamic environments through a disentanglement strategy. Our analysis shows that while VGGT excels in static scenarios, its unified treatment of motion leads to conflicts across tasks. To address this, we propose a dynamics-aware aggregator that disentangles static and dynamic content—suppressing dynamics for pose estimation while leveraging them for geometry and tracking. Combined with a targeted fine-tuning strategy on the most dynamic-sensitive layers, this design unlocks the backbone’s latent capacity for handling motion. Extensive experiments demonstrate that PAGE-4D achieves state-of-the-art results across depth, pose, and point cloud reconstruction benchmarks. Importantly, we show that effective disentanglement enables strong generalization even with limited dynamic data, paving the way for scalable and efficient 4D scene understanding.      </p>
+    </div>
+  </section>
+
+  <section class="section" id="Acknowledgements" style="padding-top: 0rem;">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700;">Acknowledgements</h2>
+      <p>
+        All video materials used in this study were obtained from Pexels (https://www.pexels.com)(5) and are distributed under the free Pexels License. While the license does not require individual attribution, we would like to acknowledge and thank the Pexels creators whose work contributed to the preparation of our figures and demonstrations.
+      </p>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This webpage template is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+              under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="static/js/comparison.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial camera positions for all model viewers
+      const initialModelViewers = [
+        document.getElementById('QualitativeResult'),
+        document.getElementById('modelViewerComparison1'),
+        document.getElementById('modelViewerComparison2'),
+        document.getElementById('modelViewerComparison3')
+      ];
+
+      // Apply consistent initial camera settings to all model viewers
+      initialModelViewers.forEach(viewer => {
+        if (viewer) {
+          viewer.addEventListener('load', () => {
+            viewer.cameraOrbit = "180deg 70deg auto";
+            if (viewer.resetTurntableRotation) {
+              viewer.resetTurntableRotation(0);
+            }
+            viewer.jumpCameraToGoal();
+          });
+        }
+      });
+
+      // Handle comparison thumbnails
+      const firstComparisonThumbnail = document.querySelector('#thumbnail-comparison video, #thumbnail-comparison img');
+      if (firstComparisonThumbnail) {
+        firstComparisonThumbnail.classList.add('thumbnail-selected');
+        // If it's a video, play it
+        if (firstComparisonThumbnail.tagName.toLowerCase() === 'video') {
+          firstComparisonThumbnail.play();
+        }
+      }
+
+      document.querySelectorAll('#thumbnail-comparison img, #thumbnail-comparison video').forEach(el => {
+        el.addEventListener('click', () => {
+          const name = el.getAttribute('name');
+
+          // Update model viewers with the corresponding GLB files
+          const modelViewer1 = document.getElementById('modelViewerComparison1');
+          const modelViewer2 = document.getElementById('modelViewerComparison2');
+
+          modelViewer1.setAttribute('src', `resources/comparison/dpg/${name}.glb`);
+          modelViewer2.setAttribute('src', `resources/comparison/vggt/${name}.glb`);
+
+          // Reset camera positions
+          [modelViewer1, modelViewer2].forEach(viewer => {
+            viewer.cameraOrbit = "180deg 70deg auto";
+            if (viewer.resetTurntableRotation) {
+              viewer.resetTurntableRotation(0);
+            }
+            viewer.jumpCameraToGoal();
+          });
+
+          // Remove selection class from all elements
+          document.querySelectorAll('#thumbnail-comparison img, #thumbnail-comparison video').forEach(element => {
+            element.classList.remove('thumbnail-selected');
+          });
+
+          // Add selection class to clicked element
+          el.classList.add('thumbnail-selected');
+
+          // Play video if it's a video element
+          if (el.tagName.toLowerCase() === 'video') {
+            el.play();
+          }
+
+          // Pause all other videos
+          document.querySelectorAll('#thumbnail-comparison video').forEach(video => {
+            if (video !== el) {
+              video.pause();
+              video.currentTime = 0;
+            }
+          });
+        });
+      });
+
+      // Handle dropdown change for the third comparison model
+      document.getElementById('comparisonBaselineSelection').addEventListener('change', function() {
+        const selectedName = document.querySelector('#thumbnail-comparison .thumbnail-selected').getAttribute('name');
+        const baseline = this.value;
+        document.getElementById('modelViewerComparison3').setAttribute('src', `resources/comparison/${baseline}/${selectedName}.glb`);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+<!-- touch .nojekyll
+git add .nojekyll
+git commit -m "disable Jekyll"
+git push -->
+
+<!-- src="./build/?playbackPath=./resources/qualitative/recording_dpg_21_r3d.viser.txt" -->
