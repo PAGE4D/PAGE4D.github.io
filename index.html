@@ -7,7 +7,7 @@
     content="Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation (ICLR 2026).">
   <meta name="keywords" content="VGGT-4D, 4D-VGGT, PAGE-4D, Camera, Point map, Depth map, 4D reconstruction">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PAGE-4D: Extending VGGT-4D for Dynamic Scene Understanding (ICLR 2026)</title>
+  <title>Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation (ICLR 2026)</title>
 
   <meta property="og:title" content="Page-4d: VGGT-4D perception via Disentangled pose and geometry estimation (ICLR 2026)" />
   <meta property="og:description"
@@ -311,6 +311,19 @@
       <h2 class="title is-4" style="font-weight: 700;">Conclusion</h2>
       <p>
         Understanding dynamic scenes remains a central challenge in 4D computer vision, where object motion simultaneously provides valuable geometric cues and disrupts static-scene assumptions critical for camera pose estimation. In this work, we introduce PAGE-4D, a feedforward framework that adapts a pretrained 3D foundation model to dynamic environments through a disentanglement strategy. Our analysis shows that while VGGT excels in static scenarios, its unified treatment of motion leads to conflicts across tasks. To address this, we propose a dynamics-aware aggregator that disentangles static and dynamic content—suppressing dynamics for pose estimation while leveraging them for geometry and tracking. Combined with a targeted fine-tuning strategy on the most dynamic-sensitive layers, this design unlocks the backbone’s latent capacity for handling motion. Extensive experiments demonstrate that PAGE-4D achieves state-of-the-art results across depth, pose, and point cloud reconstruction benchmarks. Importantly, we show that effective disentanglement enables strong generalization even with limited dynamic data, paving the way for scalable and efficient 4D scene understanding.      </p>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX" style="padding-top: 0rem;">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700;">BibTeX</h2>
+      <pre><code>@article{zhou2025page,
+  title={Page-4d: Disentangled pose and geometry estimation for 4d perception},
+  author={Zhou, Kaichen and Wang, Yuhan and Chen, Grace and Chang, Xinhai and Beaudouin, Gaspard and Zhan, Fangneng and Liang, Paul Pu and Wang, Mengyu},
+  journal={arXiv e-prints},
+  pages={arXiv--2510},
+  year={2025}
+}</code></pre>
     </div>
   </section>
 
