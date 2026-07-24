@@ -86,7 +86,7 @@
                 <span class="link-block">
                   <a href="https://github.com/kaichen-z/PAGE4D"
                     class="external-link button is-normal is-rounded is-dark">
-                    <span>💻 Code</span>
+                    <span>💻 Code&nbsp;·&nbsp;⭐ <span id="code-star-count">222</span> stars</span>
                   </a>
                 </span>
                 <!-- Demo Link -->
@@ -98,7 +98,7 @@
                 </span>
                 <!-- Demo Link -->
                 <span class="link-block">
-                  <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=Page-4d%3A+VGGT-4D+perception+via+Disentangled+pose+and+geometry+estimation&btnG="
+                  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8S6_34oAAAAJ&sortby=pubdate&citation_for_view=8S6_34oAAAAJ:1sJd4Hv_s6UC"
                     class="external-link button is-normal is-rounded is-dark">
                     <span>📄 Google Scholar&nbsp;·&nbsp;<span id="scholar-cite-count">23</span> citations</span>
                   </a>
@@ -450,6 +450,8 @@
   fetch('https://kaichen-z.github.io/data/stats.json').then(r => r.json()).then(d => {
     const n = d.citations && d.citations['page-4d'];
     if (Number.isInteger(n)) document.getElementById('scholar-cite-count').textContent = n;
+    const s = d.stars && d.stars['kaichen-z/PAGE4D'];
+    if (Number.isInteger(s)) document.getElementById('code-star-count').textContent = s;
   }).catch(() => {});
 </script>
 </body>
