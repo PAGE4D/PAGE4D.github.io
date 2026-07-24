@@ -100,7 +100,7 @@
                 <span class="link-block">
                   <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=Page-4d%3A+VGGT-4D+perception+via+Disentangled+pose+and+geometry+estimation&btnG="
                     class="external-link button is-normal is-rounded is-dark">
-                    <span>📄 Google Scholar</span>
+                    <span>📄 Google Scholar&nbsp;·&nbsp;<span id="scholar-cite-count">23</span> citations</span>
                   </a>
                 </span>
               </div>
@@ -444,6 +444,14 @@
     });
   </script>
 
+<script>
+  // Live Google Scholar citation count, refreshed daily on kaichen-z.github.io;
+  // the static number above is the fallback if the fetch fails.
+  fetch('https://kaichen-z.github.io/data/stats.json').then(r => r.json()).then(d => {
+    const n = d.citations && d.citations['page-4d'];
+    if (Number.isInteger(n)) document.getElementById('scholar-cite-count').textContent = n;
+  }).catch(() => {});
+</script>
 </body>
 
 </html>
