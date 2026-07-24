@@ -179,6 +179,14 @@
     </div>
   </section>
 
+  <section class="section" id="Comparison-VGGT-Omega" style="padding-top: 0rem;">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700; text-align: center;">Comparison Between VGGT-Omega &amp; PAGE-4D</h2>
+      <div class="content has-text-centered">
+        <video src="resources/page.mp4" autoplay loop muted playsinline style="max-width: 100%;"></video>
+      </div>
+    </div>
+  </section>
 
   <section class="section" style="padding-top: 1rem;">
     <div class="container is-max-desktop">
@@ -312,14 +320,6 @@
       <h2 class="title is-4" style="font-weight: 700;">Conclusion</h2>
       <p>
         Understanding dynamic scenes remains a central challenge in 4D computer vision, where object motion simultaneously provides valuable geometric cues and disrupts static-scene assumptions critical for camera pose estimation. In this work, we introduce PAGE-4D, a feedforward framework that adapts a pretrained 3D foundation model to dynamic environments through a disentanglement strategy. Our analysis shows that while VGGT excels in static scenarios, its unified treatment of motion leads to conflicts across tasks. To address this, we propose a dynamics-aware aggregator that disentangles static and dynamic content—suppressing dynamics for pose estimation while leveraging them for geometry and tracking. Combined with a targeted fine-tuning strategy on the most dynamic-sensitive layers, this design unlocks the backbone’s latent capacity for handling motion. Extensive experiments demonstrate that PAGE-4D achieves state-of-the-art results across depth, pose, and point cloud reconstruction benchmarks. Importantly, we show that effective disentanglement enables strong generalization even with limited dynamic data, paving the way for scalable and efficient 4D scene understanding.      </p>
-    </div>
-  </section>
-
-  <section class="section" id="Overview" style="padding-top: 0rem;">
-    <div class="container is-max-desktop content">
-      <div class="content has-text-centered">
-        <video src="resources/page.mp4" autoplay loop muted playsinline style="max-width: 100%;"></video>
-      </div>
     </div>
   </section>
 
