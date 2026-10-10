@@ -101,7 +101,7 @@
                 <span class="link-block">
                   <a href="https://arxiv.org/pdf/2510.17568"
                     class="external-link button is-normal is-rounded is-dark">
-                    <span>📄 Paper&nbsp;·&nbsp;<span id="scholar-cite-count">30</span> citations</span>
+                    <span>📄 Paper&nbsp;·&nbsp;<span id="paper-cite-count">34</span> citations</span>
                   </a>
                 </span>
                 <span class="link-block">
@@ -457,11 +457,8 @@
   </script>
 
 <script>
-  // Live Google Scholar citation count, refreshed daily on kaichen-z.github.io;
-  // the static number above is the fallback if the fetch fails.
+  // Refresh repository stars; the citation count is maintained in the page.
   fetch('https://kaichen-z.github.io/data/stats.json').then(r => r.json()).then(d => {
-    const n = d.citations && d.citations['page-4d'];
-    if (Number.isInteger(n)) document.getElementById('scholar-cite-count').textContent = n;
     const s = d.stars && d.stars['kaichen-z/PAGE4D'];
     if (Number.isInteger(s)) document.getElementById('code-star-count').textContent = s;
   }).catch(() => {});
